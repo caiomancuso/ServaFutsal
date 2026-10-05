@@ -80,9 +80,9 @@
     var top = D.atletas.slice().sort(function (a, b) { return b.gols - a.gols; }).slice(0, 5);
     var maxG = top.length ? top[0].gols : 1;
     return [
-      h("div", { class: "grid2" }, cardQuadro(1), cardQuadro(2)),
-      h("div", { class: "grid2" },
-        ult ? h("div", { class: "card" }, h("h2", null, "Último jogo · " + S.fmtData(ult.data)), blocoPlacar(ult, 2), blocoPlacar(ult, 1)) : null,
+      
+      h("div", null,
+        ult ? h("div", { class: "card" }, h("h2", null, "Último jogo · " + S.fmtData(ult.data)), h("div", { class: "grid2" }, blocoPlacar(ult, 2), blocoPlacar(ult, 1))) : null, h("div", { class: "grid2" }, cardQuadro(1), cardQuadro(2)),
         h("div", { class: "card" }, h("h2", null, "Artilharia"),
           h("table", null, h("tbody", null, top.map(function (a, i) {
             return h("tr", { class: a.ativo ? null : "out" },
