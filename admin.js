@@ -265,7 +265,7 @@
         h("div", { class: "row" }, h("label", { class: "f" }, "Data", data), h("label", { class: "f" }, "Adversário", adv, lista)),
         h("label", { class: "f" }, "Observação", obs),
         h("div", { class: "grid2" }, caixaQuadro(2), caixaQuadro(1))),
-      h("div", { class: "card" }, h("h2", null, "Atletas"), F.linhas.map(linhaAtleta)),
+      h("div", { class: "card" }, h("h2", null, "Atletas"), h("p", { style: "color:var(--muted);font-size:13px;margin:0 0 6px" }, "Toque em Ausente para marcar presença. Os campos de gols, apito e horário aparecem para quem está presente."), F.linhas.map(linhaAtleta)),
       h("div", { class: "sticky-save" },
         h("button", { class: "btn primary", onclick: salvar }, F.id ? "Salvar alterações" : "Salvar jogo"),
         F.id ? h("button", { class: "btn", onclick: function () { novoForm(null); aviso = null; render(); } }, "Cancelar") : null)
