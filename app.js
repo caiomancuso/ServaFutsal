@@ -111,9 +111,9 @@
     ];
   }
 
-  function viewElenco() {
+  function tabelaElenco(ativos, titulo) {
     var cols = [["nome", "Atleta"], ["presencas", "Jogos"], ["pres", "% Pres."], ["gols", "Gols"], ["gols_q1", "1ºQ"], ["gols_q2", "2ºQ"], ["media", "Média"]];
-    var rows = D.atletas.map(function (a) {
+    var rows = D.atletas.filter(function (a) { return a.ativo === ativos; }).map(function (a) {
       var o = {}; for (var k in a) o[k] = a[k];
       o.pres = a.jogos ? a.presencas / a.jogos : 0;
       o.media = a.presencas ? a.gols / a.presencas : 0;
@@ -123,7 +123,7 @@
       if (typeof x === "string" || typeof y === "string") return ordElenco.dir * String(x || "").localeCompare(String(y || ""));
       return ordElenco.dir * (x - y) || a.nome.localeCompare(b.nome);
     });
-    return h("div", { class: "card" }, h("h2", null, "Elenco · " + (rows.length ? rows[0].jogos : 0) + " jogos na temporada"),
+    if (!rows.length) return null; return h("div", { class: "card" }, h("h2", null, titulo + " · " + rows.length + " atletas"),
       h("div", { class: "tablewrap" }, h("table", null,
         h("thead", null, h("tr", null, cols.map(function (c) {
           return h("th", {
@@ -136,11 +136,11 @@
         }))),
         h("tbody", null, rows.map(function (a) {
           return h("tr", { class: a.ativo ? null : "out" },
-            h("td", null, a.nome), h("td", null, a.presencas), h("td", null, S.pct(a.pres)),
+            h("td", { style: "text-decoration:none" }, a.nome), h("td", null, a.presencas), h("td", null, S.pct(a.pres)),
             h("td", { class: "total" }, a.gols), h("td", null, a.gols_q1), h("td", null, a.gols_q2),
             h("td", null, a.presencas ? a.media.toFixed(2).replace(".", ",") : "–"));
         })))),
-      h("p", { style: "color:var(--muted);font-size:13px;margin:12px 0 0" }, "Nomes riscados: atletas que saíram do time (estatísticas mantidas)."));
+      null);
   }
 
   function viewJogos() {
@@ -160,7 +160,7 @@
     }));
   }
 
-  var VIEWS = { resumo: viewResumo, ranking: viewRanking, elenco: viewElenco, jogos: viewJogos };
+  function viewElenco() { return [tabelaElenco(true, "Elenco atual"), tabelaElenco(false, "Saíram do elenco")]; } var VIEWS = { resumo: viewResumo, ranking: viewRanking, elenco: viewElenco, jogos: viewJogos };
 
   function render() {
     S.clear(tabsEl);
