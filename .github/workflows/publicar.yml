@@ -1,0 +1,29 @@
+name: Extrair site do zip
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "*.zip"
+      - .github/workflows/publicar.yml
+permissions:
+  contents: write
+jobs:
+  extrair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extrair arquivos para a raiz
+        run: |
+          shopt -s nullglob
+          zips=(*.zip)
+          if [ ${#zips[@]} -eq 0 ]; then echo "Sem zip para extrair"; exit 0; fi
+          for z in "${zips[@]}"; do
+            unzip -o "$z" -x '.github/*'
+            git rm -q --cached "$z"
+            rm "$z"
+          done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Publica site a partir do zip"
+          git push
