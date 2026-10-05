@@ -33,7 +33,7 @@ main { max-width: 980px; margin: 0 auto; padding: 8px 16px 60px; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; margin-bottom: 14px; }
 .card h2 { margin: 0 0 12px; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } main th, main td { padding: 9px 3px; font-size: 13px; } main th { font-size: 10px; letter-spacing: 0; } main td:first-child { white-space: normal; } main td.total { font-size: 14px; } header.top h1 { font-size: 22px; } } .grid2 { margin-bottom: 14px; } .grid2 > .card, .grid2 > div { margin-bottom: 0 !important; }
 .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; }
 .kpi b { display: block; font-size: 26px; font-weight: 800; line-height: 1.1; }
 .kpi span { font-size: 12px; color: var(--muted); }
