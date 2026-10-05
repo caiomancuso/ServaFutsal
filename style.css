@@ -17,6 +17,7 @@ body {
   font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 .flag { height: 6px; background: linear-gradient(to right, var(--red) 33.3%, #fff 33.3% 66.6%, var(--green) 66.6%); }
+header.top .logo { width: 56px; height: 56px; object-fit: contain; background: #fff; border-radius: 12px; padding: 4px; align-self: center; }
 header.top { max-width: 980px; margin: 0 auto; padding: 18px 16px 6px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 header.top h1 { margin: 0; font-size: 26px; letter-spacing: .04em; font-weight: 900; }
 header.top h1 span { color: var(--red); }

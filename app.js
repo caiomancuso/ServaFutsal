@@ -15,13 +15,12 @@
       db.from("partidas").select("id,data,adversario,obs,quadros(quadro,gols_pro,gols_contra)").order("data", { ascending: false }),
       db.from("v_atletas_stats").select("*"),
       db.from("v_pontuacao").select("*"),
-      db.from("gols").select("partida_id,atleta_id,quadro,qtd"),
-      db.from("regras_pontos").select("*").order("ordem")
+      db.from("gols").select("partida_id,atleta_id,quadro,qtd")
     ]).then(function (r) {
       var atletas = S.ok(r[1]);
       var nomes = {};
       atletas.forEach(function (a) { nomes[a.id] = a.nome; });
-      D = { partidas: S.ok(r[0]), atletas: atletas, pontos: S.ok(r[2]), gols: S.ok(r[3]), regras: S.ok(r[4]), nomes: nomes };
+      D = { partidas: S.ok(r[0]), atletas: atletas, pontos: S.ok(r[2]), gols: S.ok(r[3]), nomes: nomes };
     });
   }
 
@@ -108,16 +107,12 @@
               h("td", null, h("span", { class: "rank" }, i + 1), x.r.nome),
               h("td", { class: "total" }, x.t),
               cols.map(function (c) { var v = x.r[c[0]]; return h("td", { class: v < 0 ? "neg" : null }, v === 0 ? "–" : v); }));
-          }))))),
-      h("div", { class: "card" }, h("h2", null, "Regras"),
-        h("ul", { class: "rules" }, D.regras.map(function (r) {
-          return h("li", null, h("span", null, r.descricao), h("b", { class: r.pontos < 0 ? "n" : "p" }, (r.pontos > 0 ? "+" : "") + r.pontos));
-        })))
+          })))))
     ];
   }
 
   function viewElenco() {
-    var cols = [["nome", "Atleta"], ["posicao", "Posição"], ["presencas", "Jogos"], ["pres", "% Pres."], ["gols", "Gols"], ["gols_q1", "1ºQ"], ["gols_q2", "2ºQ"], ["media", "Média"], ["apitos", "Apitos"]];
+    var cols = [["nome", "Atleta"], ["presencas", "Jogos"], ["pres", "% Pres."], ["gols", "Gols"], ["gols_q1", "1ºQ"], ["gols_q2", "2ºQ"], ["media", "Média"]];
     var rows = D.atletas.map(function (a) {
       var o = {}; for (var k in a) o[k] = a[k];
       o.pres = a.jogos ? a.presencas / a.jogos : 0;
@@ -141,9 +136,9 @@
         }))),
         h("tbody", null, rows.map(function (a) {
           return h("tr", { class: a.ativo ? null : "out" },
-            h("td", null, a.nome), h("td", { class: "pos" }, a.posicao || "–"), h("td", null, a.presencas), h("td", null, S.pct(a.pres)),
+            h("td", null, a.nome), h("td", null, a.presencas), h("td", null, S.pct(a.pres)),
             h("td", { class: "total" }, a.gols), h("td", null, a.gols_q1), h("td", null, a.gols_q2),
-            h("td", null, a.presencas ? a.media.toFixed(2).replace(".", ",") : "–"), h("td", null, a.apitos));
+            h("td", null, a.presencas ? a.media.toFixed(2).replace(".", ",") : "–"));
         })))),
       h("p", { style: "color:var(--muted);font-size:13px;margin:12px 0 0" }, "Nomes riscados: atletas que saíram do time (estatísticas mantidas)."));
   }

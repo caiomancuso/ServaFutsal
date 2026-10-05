@@ -23,7 +23,7 @@
   }
 
   /* ---------- login ---------- */
-  function telaLogin(erro, info) {
+  function telaLogin(erro) {
     S.clear(tabsEl); sub.textContent = "";
     var email = h("input", { type: "email", autocomplete: "username", placeholder: "seu@email.com" });
     var senha = h("input", { type: "password", autocomplete: "current-password", placeholder: "Senha" });
@@ -32,24 +32,13 @@
         if (r.error) telaLogin("Não foi possível entrar: " + r.error.message); else iniciar();
       });
     }
-    function criar() {
-      if (senha.value.length < 8) { telaLogin("Use uma senha com pelo menos 8 caracteres."); return; }
-      db.auth.signUp({ email: email.value.trim(), password: senha.value, options: { emailRedirectTo: location.href.split("#")[0] } }).then(function (r) {
-        if (r.error) telaLogin("Não foi possível criar a conta: " + r.error.message);
-        else if (r.data && r.data.session) iniciar();
-        else telaLogin(null, "Conta criada. Confirme pelo link enviado ao seu e-mail e depois entre com a senha.");
-      });
-    }
     S.clear(main).appendChild(h("div", { class: "card", style: "max-width:420px;margin:30px auto" },
       h("h2", null, "Entrar"),
       erro ? h("div", { class: "err" }, erro) : null,
-      info ? h("div", { class: "ok" }, info) : null,
       h("label", { class: "f" }, "E-mail", email),
       h("label", { class: "f" }, "Senha", senha),
-      h("div", { class: "row" },
-        h("button", { class: "btn primary", onclick: entrar }, "Entrar"),
-        h("button", { class: "btn", onclick: criar }, "Primeiro acesso")),
-      h("p", { style: "color:var(--muted);font-size:13px" }, "Só o e-mail autorizado no banco consegue gravar. Outras contas ficam somente leitura.")));
+      h("button", { class: "btn primary", style: "width:100%", onclick: entrar }, "Entrar")));
+    senha.onkeydown = function (e) { if (e.key === "Enter") entrar(); };
   }
 
   function iniciar() {
@@ -322,6 +311,19 @@
           .then(function () { novoForm(null); render(); }).catch(falha);
       };
     }
+    function excluir(a) {
+      return function () {
+        if (!window.confirm("Excluir " + a.nome + " do cadastro? Isso não pode ser desfeito.")) return;
+        db.from("atletas").delete().eq("id", a.id).select("id").then(function (r) {
+          if (r.error) {
+            if (r.error.code === "23503") throw new Error(a.nome + " tem jogos, gols, ocorrências ou mensalidades lançados e não pode ser excluído sem apagar o histórico do time. Use “Marcar saída”.");
+            throw new Error(r.error.message);
+          }
+          if (!r.data || !r.data.length) throw new Error("Não foi possível excluir (sem permissão).");
+          return recarregar();
+        }).then(function () { msg("ok", a.nome + " excluído."); novoForm(null); render(); }).catch(falha);
+      };
+    }
     return [
       h("div", { class: "card" }, h("h2", null, "Novo atleta"),
         h("div", { class: "row" }, h("label", { class: "f" }, "Nome", nome), h("label", { class: "f" }, "Posição", pos), h("label", { class: "f" }, "Quadro", qd)),
@@ -330,7 +332,8 @@
         D.atletas.map(function (a) {
           return h("div", { class: "list-item" },
             h("div", { class: "grow", style: a.ativo ? null : "color:var(--muted);text-decoration:line-through" }, h("b", null, a.nome), h("small", null, (a.posicao || "–") + (a.quadro ? " · " + a.quadro + "º Quadro" : ""))),
-            h("button", { class: "btn small", onclick: alternar(a) }, a.ativo ? "Marcar saída" : "Reativar"));
+            h("button", { class: "btn small", onclick: alternar(a) }, a.ativo ? "Marcar saída" : "Reativar"),
+            h("button", { class: "btn small danger", onclick: excluir(a) }, "Excluir"));
         }))
     ];
   }
