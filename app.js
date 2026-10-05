@@ -8,7 +8,7 @@
   var aba = "resumo";
   var ordElenco = { col: "gols", dir: -1 };
 
-  var ABAS = [["resumo", "Resumo"], ["ranking", "Ranking"], ["elenco", "Elenco"], ["jogos", "Jogos"]];
+  var ABAS = [["resumo", "Resumo"], ["elenco", "Elenco"], ["jogos", "Jogos"]];
 
   function carregar() {
     return Promise.all([
