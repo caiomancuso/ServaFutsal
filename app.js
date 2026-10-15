@@ -103,7 +103,7 @@
       h("div", { class: "grid2" }, cardQuadro(1), cardQuadro(2)),
       h("section", { class: "card" }, h("h2", null, "Artilharia"),
         h("ol", { class: "scorers" }, top.map(function (a, i) {
-          return h("li", { class: (i === 0 ? "lead" : "") + (a.ativo ? "" : " out") },
+          return h("li", { class: (i === 0 ? "lead" : "") + (i < 3 ? " m" + (i + 1) : "") + (a.ativo ? "" : " out") },
             h("span", { class: "pos" }, i + 1),
             h("span", { class: "nm" }, a.nome),
             h("span", { class: "bar" }, h("i", { style: "width:" + Math.round(100 * a.gols / maxG) + "%" })),
