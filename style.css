@@ -315,3 +315,61 @@ button.btn:disabled { opacity: .5; cursor: default; }
   .form { margin-left: 0; flex-basis: 100%; }
   nav.tabs button { padding: 10px 14px; font-size: 14px; }
 }
+
+/* ===== Identidade húngara (bandeira horizontal) ===== */
+:root { --red:#e0475a; --red-deep:#CE2939; --green:#79b388; --green-deep:#477050; --white:#F4F1E8;
+  --bg:#0b0f0d; --card:#131815; --green-soft:rgba(121,179,136,.15); }
+body { background:
+  radial-gradient(900px 500px at 105% -10%, rgba(71,112,80,.30), transparent 60%),
+  radial-gradient(700px 420px at -10% 0%, rgba(206,41,57,.14), transparent 60%),
+  var(--bg); }
+header.top { background:
+    linear-gradient(90deg, #0b0f0d 0%, rgba(11,15,13,.94) 34%, rgba(11,15,13,.55) 62%, rgba(11,15,13,.10) 100%),
+    linear-gradient(180deg, #CE2939 0 33.34%, #F4F1E8 33.34% 66.67%, #477050 66.67%);
+  border-bottom: 0; padding-bottom: 66px; }
+header.top::before { content:""; position:absolute; right:max(16px, calc((100vw - 980px)/2 + 120px)); top:50%; width:150px; height:150px; transform:translateY(-58%);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-50 -50 100 100'%3E%3Cg fill='%23ffffff'%3E%3Cpath d='M0 -47C9 -38 9 -30 0 -23C-9 -30 -9 -38 0 -47Z' transform='rotate%2822.5%29'/%3E%3Cpath d='M0 -47C9 -38 9 -30 0 -23C-9 -30 -9 -38 0 -47Z' transform='rotate%2867.5%29'/%3E%3Cpath d='M0 -47C9 -38 9 -30 0 -23C-9 -30 -9 -38 0 -47Z' transform='rotate%28112.5%29'/%3E%3Cpath d='M0 -47C9 -38 9 -30 0 -23C-9 -30 -9 -38 0 -47Z' transform='rotate%28157.5%29'/%3E%3Cpath d='M0 -47C9 -38 9 -30 0 -23C-9 -30 -9 -38 0 -47Z' transform='rotate%28202.5%29'/%3E%3Cpath d='M0 -47C9 -38 9 -30 0 -23C-9 -30 -9 -38 0 -47Z' transform='rotate%28247.5%29'/%3E%3Cpath d='M0 -47C9 -38 9 -30 0 -23C-9 -30 -9 -38 0 -47Z' transform='rotate%28292.5%29'/%3E%3Cpath d='M0 -47C9 -38 9 -30 0 -23C-9 -30 -9 -38 0 -47Z' transform='rotate%28337.5%29'/%3E%3C/g%3E%3Cg fill='%23ffffff'%3E%3Cellipse cx='0' cy='-23' rx='8.5' ry='14' transform='rotate%280%29'/%3E%3Cellipse cx='0' cy='-23' rx='8.5' ry='14' transform='rotate%2845%29'/%3E%3Cellipse cx='0' cy='-23' rx='8.5' ry='14' transform='rotate%2890%29'/%3E%3Cellipse cx='0' cy='-23' rx='8.5' ry='14' transform='rotate%28135%29'/%3E%3Cellipse cx='0' cy='-23' rx='8.5' ry='14' transform='rotate%28180%29'/%3E%3Cellipse cx='0' cy='-23' rx='8.5' ry='14' transform='rotate%28225%29'/%3E%3Cellipse cx='0' cy='-23' rx='8.5' ry='14' transform='rotate%28270%29'/%3E%3Cellipse cx='0' cy='-23' rx='8.5' ry='14' transform='rotate%28315%29'/%3E%3C/g%3E%3Ccircle r='12.5' fill='rgba%280,0,0,0%29'/%3E%3Ccircle r='7.5' fill='%23ffffff'/%3E%3Ccircle r='3' fill='rgba%280,0,0,0%29'/%3E%3C/svg%3E") center/contain no-repeat; opacity:.10; z-index:0; }
+header.top::after { background: linear-gradient(180deg, transparent 60%, rgba(11,15,13,.9)); }
+.card h2::before, .match::before { background:linear-gradient(180deg, #CE2939 0 33.34%, #F4F1E8 33.34% 66.67%, #477050 66.67%); transform:none; }
+.card h2::before { width:22px; height:14px; border-radius:3px; box-shadow:0 0 0 1px rgba(255,255,255,.08); }
+.match::before { height:9px; }
+.match { background:
+    radial-gradient(520px 260px at 100% 0%, rgba(206,41,57,.16), transparent 70%),
+    radial-gradient(520px 300px at 0% 100%, rgba(71,112,80,.26), transparent 70%),
+    linear-gradient(160deg, #18201b, #0d120f); }
+.board.V::before { background: linear-gradient(180deg, var(--green), var(--green-deep)); }
+.board.V .nums b:first-child { text-shadow: 0 0 26px rgba(121,179,136,.45); }
+.ring { background: conic-gradient(var(--green) calc(var(--p) * 1%), rgba(255,255,255,.08) 0); }
+.stackbar i.v, .scorers .bar i { background: linear-gradient(90deg, var(--green-deep), var(--green)); }
+.chip.V { background:#477050; }
+.scorers li.lead { background: linear-gradient(180deg, rgba(206,41,57,.20), rgba(244,241,232,.05) 50%, rgba(71,112,80,.22)); }
+.scorers li.lead .bar { height: 12px; }
+.scorers li.lead .bar i { background: linear-gradient(180deg, #CE2939 0 33.34%, #F4F1E8 33.34% 66.67%, #477050 66.67%); }
+nav.tabs button.on { background: linear-gradient(135deg, #e0475a, #a81f2f); }
+@media (max-width: 680px) {
+  header.top { background:
+    linear-gradient(90deg, #0b0f0d 0%, rgba(11,15,13,.96) 55%, rgba(11,15,13,.45) 80%, rgba(11,15,13,.05) 100%),
+    linear-gradient(180deg, #CE2939 0 33.34%, #F4F1E8 33.34% 66.67%, #477050 66.67%); }
+  header.top::before { width: 96px; height: 96px; right: 70px; }
+}
+
+/* ===== Medalhas da artilharia (top 3) ===== */
+.scorers li.m1 .pos, .scorers li.m2 .pos, .scorers li.m3 .pos {
+  position: relative; justify-self: center; width: 34px; height: 34px; margin-top: 10px; border-radius: 50%;
+  display: grid; place-items: center; font: italic 800 18px/1 var(--disp); color: #2b1f08; -webkit-text-stroke: 0;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .25), inset 0 2px 0 rgba(255, 255, 255, .55), 0 0 0 2px rgba(0, 0, 0, .25), 0 6px 14px rgba(0, 0, 0, .45);
+}
+.scorers li.m1 .pos { background: radial-gradient(circle at 35% 28%, #fff7cf, #f2c94c 45%, #a8780a); }
+.scorers li.m2 .pos { background: radial-gradient(circle at 35% 28%, #ffffff, #c9d0d8 45%, #6f7a86); }
+.scorers li.m3 .pos { background: radial-gradient(circle at 35% 28%, #ffe0c2, #cd7f32 45%, #7c4318); color: #2a1406; }
+.scorers li.m1 .pos::before, .scorers li.m2 .pos::before, .scorers li.m3 .pos::before {
+  content: ""; position: absolute; z-index: -1; top: -13px; left: 50%; width: 18px; height: 18px; transform: translateX(-50%);
+  background: linear-gradient(180deg, #CE2939 0 33.34%, #F4F1E8 33.34% 66.67%, #477050 66.67%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%);
+}
+.scorers li.lead.m1 .pos { width: 42px; height: 42px; font-size: 22px; color: #2b1f08; }
+.scorers li.m1 b { color: #f5d77a; }
+@media (max-width: 680px) {
+  .scorers li.m1 .pos, .scorers li.m2 .pos, .scorers li.m3 .pos { width: 30px; height: 30px; font-size: 16px; }
+  .scorers li.lead.m1 .pos { width: 34px; height: 34px; font-size: 18px; }
+}
